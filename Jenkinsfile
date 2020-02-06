@@ -6,11 +6,12 @@
         }
         }
         stage('Build') {
-        steps {sh "mvn compile"
+        steps {
+        bat "mvn compile"
         }
         }stage('Test') {
         steps {
-        sh "mvn test"
+        bat "mvn test"
         }
         post {
         always {
