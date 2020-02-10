@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                bat "mvn compile"
+                sh "mvn compile"
 
             }
 
@@ -17,7 +17,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                bat "mvn test"
+                sh "mvn test"
 
             }
             post {
