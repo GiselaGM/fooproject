@@ -6,9 +6,7 @@ pipeline
         stage('Checkout')
         {
             steps {git 'https://github.com/GiselaGM/fooproject.git'
-
         }
-
     }
         stage('Build')
         {
@@ -22,7 +20,6 @@ pipeline
             steps
             {
                 sh "mvn test"
-
             }
         }
         stage('newman')
@@ -47,5 +44,5 @@ pipeline
                 }
             }
         }
-    }
+    
 }
