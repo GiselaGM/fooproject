@@ -5,9 +5,11 @@ pipeline
     {
         stage('Checkout')
         {
-            steps {git 'https://github.com/GiselaGM/fooproject.git'
+            steps
+            {
+                git 'https://github.com/GiselaGM/fooproject.git'
+            }
         }
-    }
         stage('Build')
         {
             steps
@@ -36,6 +38,7 @@ pipeline
                             }
                     }
         }
+    }
             post
             {
                 always
@@ -43,6 +46,6 @@ pipeline
                     junit '**/TEST*.xml'
                 }
             }
-        
+
 
 }
