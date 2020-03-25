@@ -37,7 +37,7 @@ pipeline
         }
         stage('Robot Framework System tests with Selenium') {
                 steps {
-                    sh 'robot --variable BROWSER:headlessfirefox -d Results  Tests'
+                    sh 'robot -d results --variable BROWSER:headlessfirefox ./Tests/infotiv.robot.robot'
                 }
                 post {
                     always {
@@ -58,7 +58,7 @@ pipeline
                         }
                     }
                 }
-            }
+        }
     post {
         always {
             junit '**/TEST*.xml'
