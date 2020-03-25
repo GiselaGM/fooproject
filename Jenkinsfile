@@ -33,7 +33,7 @@ pipeline {
 
         stage('Robot Framework System tests with Selenium') {
                 steps {
-                    sh 'robot -d results --variable BROWSER:headlessfirefox ./Tests/infotiv.robot.robot'
+                    sh 'robot -d results --variable BROWSER:firefox -headless ./Tests/infotiv.robot.robot'
                 }
                 post {
                     always {
