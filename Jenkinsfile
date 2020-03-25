@@ -24,28 +24,44 @@ pipeline
                 sh "mvn test"
             }
         }
-        stage('newman')
-        {
-               steps
-                {
+        stage('newman') {
+               steps{
                 sh 'newman run RestfulBooker.postman_collection.json --environment RestfulBooker.postman_environment.json --reporters junit'
                 }
-                    post
-                    {
-                            always
-                            {
+                    post{
+                            always{
                                  junit '**/*xml'
                             }
                     }
+                }
         }
-    }
-            post
-            {
-                always
-                {
-                    junit '**/TEST*.xml'
+        stage('Robot Framework System tests with Selenium') {
+                steps {
+                    sh 'robot --variable BROWSER:headlesschrome -d Results  Tests'
+                }
+                post {
+                    always {
+                        script {
+                              step(
+                                    [
+                                      $class              : 'RobotPublisher',
+                                      outputPath          : 'results',
+                                      outputFileName      : '**/output.xml',
+                                      reportFileName      : '**/report.html',
+                                      logFileName         : '**/log.html',
+                                      disableArchiveOutput: false,
+                                      passThreshold       : 50,
+                                      unstableThreshold   : 40,
+                                      otherFiles          : "**/*.png,**/*.jpg",
+                                    ]
+                              )
+                        }
+                    }
                 }
             }
-
-
+    post {
+        always {
+            junit '**/TEST*.xml'
+        }
+    }
 }
